@@ -34,8 +34,8 @@ function [S_hat, CI] = sobolev_inner_product_est(Xs, Ys, s, Z, alpha)
       alpha = 0.05; % default confidence level
     end
 
-    Ws = bsxfun(@times, Zs, exp(-i * Xs * Zs));
-    Vs = bsxfun(@times, Zs, exp(-i * Ys * Zs));
+    Ws = bsxfun(@times, abs(Zs).^s, exp(-i * Xs * Zs));
+    Vs = bsxfun(@times, abs(Zs).^s, exp(-i * Ys * Zs));
 
     W = mean(Ws, 1);
     V = mean(Vs, 1);

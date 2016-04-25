@@ -6,7 +6,7 @@ function p = asymptotic_test(Xs, Ys, s, Z)
 
   Zs = [-Z:-1 1:Z];
 
-  Ws = bsxfun(@times, Zs, exp(-i * Xs * Zs) - exp(-i * Ys * Zs));
+  Ws = bsxfun(@times, abs(Zs).^s, exp(-i * Xs * Zs) - exp(-i * Ys * Zs));
 
   W = mean(Vs, 1);
   Sigma = cov(Vs);
