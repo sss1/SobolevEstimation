@@ -8,8 +8,8 @@ function p = asymptotic_test(Xs, Ys, s, Z)
 
   Ws = bsxfun(@times, abs(Zs).^s, exp(-i * Xs * Zs) - exp(-i * Ys * Zs));
 
-  W = mean(Vs, 1);
-  Sigma = cov(Vs);
+  W = mean(Ws, 1);
+  Sigma = cov(Ws);
 
   T = n*real(W*inv(Sigma)*W'); % Hotelling's T^2 statistic
 
