@@ -11,13 +11,13 @@
 % Outputs:
 %   S_hat - estimated sobolev norm
 
-function S_hat = sobolev_norm_est(Xs, s, Z)
+function [S_hat, CI] = sobolev_norm_est(Xs, s, Z)
 
   n = floor(size(Xs, 1)/2);
 
   Xs_1 = Xs(1:n, :);
   Xs_2 = Xs((n + 1):end, :);
 
-  S_hat = sobolev_inner_product_est(Xs_1, Xs_2, s, Z);
+  [S_hat, CI] = sobolev_inner_product_est(Xs_1, Xs_2, s, Z);
 
 end
