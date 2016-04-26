@@ -13,12 +13,12 @@ sigma = 0.1; % Gaussian noise variance
 alpha = 0.05; % Type I error bound
 
 D = 1; % TODO: generalize this
-s = 0; % Sobolev order to estimate
+s = 1; % Sobolev order to estimate
 
 % s2 is the assumed order of Sobolev smoothness. s2 must be greater than s to
 % guarantee consistency. s2 = 2s + D/4 is the minimum degree of smoothness
 % assumed to guarantee O(1/n) mean squared error
-s2 = 2;
+s2 = 3;
 
 Zs = @(n) round(n^(2/(4*s2 + D))); % scaling of Z_n with n
 
