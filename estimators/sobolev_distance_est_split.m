@@ -2,8 +2,6 @@
 % and Ys are IID samples, using the Fourier basis truncated to frequencies
 % below Z
 %
-% N.B.: CURRENTLY, THIS ONLY WORKS FOR D = 1
-%
 % Inputs:
 %   Xs - n-by-D matrix of n observations of a D-dimensional variable
 %   Ys - n-by-D matrix of n observations of a D-dimensional variable

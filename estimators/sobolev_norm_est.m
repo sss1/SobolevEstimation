@@ -1,8 +1,6 @@
 % Estimates the s-order Sobolev norm of the density from which Xs is an IID
 % sample, using the Fourier basis truncated to frequencies below Z
 %
-% N.B.: CURRENTLY, THIS ONLY WORKS FOR D = 1
-%
 % Inputs:
 %   Xs - n-by-D matrix of n observations of a D-dimensional variable
 %   s - order of the Sobolev norm to compute
