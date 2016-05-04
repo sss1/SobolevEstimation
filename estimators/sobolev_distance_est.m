@@ -15,12 +15,14 @@
 
 function S_hat = sobolev_distance_est(Xs, Ys, s, Z)
 
-  Zs = -Z:Z;
+  D = size(Xs, 2);
+
+  Zs = permn(-Z:Z, D)';
 
   % TODO: generalize the outer products Xs*Zs and Ys*Zs to D > 1
   diff_hats = (mean(exp(-i * Xs * Zs), 1) - mean(exp(-i * Ys * Zs), 1))';
 
-  coeffs = abs(Zs).^(2*s);
+  coeffs = prod(abs(Zs).^(2*s), 1);
 
   S_hat = coeffs*(real(diff_hats).^2 + imag(diff_hats).^2);
 

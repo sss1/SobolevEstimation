@@ -2,17 +2,17 @@
 % two distribution that differ via corruption by additive Gaussian noise, using
 % a permutation test. This is rather slow, due to the permutation test.
 
-n_trials = 1000;
+n_trials = 10;
 
 f = @(x) 1 + (pi < x); % density function (up to multiplicative constant)
 upper_bound = 2; % upper bound on f for monte carlo sampling
 
-ns = round(logspace(1, 6, 30)); % sample sizes to try
-sigma = 0.1; % Gaussian noise variance
+ns = round(logspace(1, 4.5, 10)); % sample sizes to try
+sigma = 1; % Gaussian noise variance
 % n_perms = 1000; % number of permutations in permutation test
 alpha = 0.05; % Type I error bound
 
-D = 1; % TODO: generalize this
+D = 3; % data dimension
 s = 1; % Sobolev order to estimate
 
 % s2 is the assumed order of Sobolev smoothness. s2 must be greater than s to
@@ -34,8 +34,10 @@ for n_idx = 1:length(ns)
 
   for trial = 1:n_trials
 
-    Xs = monte_carlo_sample(f, 2, ns(n_idx));
-    Ys = monte_carlo_sample(f, 2, ns(n_idx)) + normrnd(0, sigma, ns(n_idx), 1);
+%     Xs = monte_carlo_sample(f, 2, ns(n_idx));
+%     Ys = monte_carlo_sample(f, 2, ns(n_idx)) + normrnd(0, sigma, ns(n_idx), 1);
+    Xs = normrnd(0, sigma, ns(n_idx), D);
+    Ys = normrnd(0.05, sigma, ns(n_idx), D);
 
     ps(n_idx, trial) = asymptotic_test(Xs, Ys, s, Zs(n));
 
@@ -48,7 +50,7 @@ for n_idx = 1:length(ns)
 
   end
 
-  [n mean(ps(n_idx, :)) Zs(n)]
+  [n mean(ps(n_idx, :)) Zs(n) (2*Zs(n))^D]
 
 end
 

@@ -1,13 +1,13 @@
 % A basic experiment demonstrating consistency of the distance estimator for
 % distinguishing two samples corrupted by additive Gaussian noise
 
-n_trials = 1000;
+n_trials = 100;
 
 f = @(x) 1 + (pi < x); % density function (up to multiplicative constant)
 upper_bound = 2; % upper bound on f for monte carlo sampling
 
-ns = round(logspace(1, 6, 20)); % sample sizes to try
-sigma = 0.0; % Gaussian noise variance
+ns = round(logspace(1, 4, 20)); % sample sizes to try
+sigma = 1.0; % Gaussian noise variance
 
 D = 1; % TODO: generalize this
 s = 1; % Sobolev order to estimate

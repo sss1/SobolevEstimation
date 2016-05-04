@@ -2,18 +2,20 @@
 % asymptotic distribution of chi^2(2*Z), for any fixed Z
 function p = asymptotic_test(Xs, Ys, s, Z)
 
-  n = size(Xs, 1);
+  n = size(Xs, 1); % sample size
 
-  Zs = [-Z:-1 1:Z];
+  D = size(Xs, 2); % data dimension
 
-  Ws = bsxfun(@times, abs(Zs).^s, exp(-i * Xs * Zs) - exp(-i * Ys * Zs));
+  Zs = permn([-Z:-1 1:Z], D)'; % all test (multidimensional) frequencies
 
+  coeffs = prod(abs(Zs).^s, 1);
+
+  Ws = bsxfun(@times, coeffs, exp(-i * Xs * Zs) - exp(-i * Ys * Zs));
   W = mean(Ws, 1);
   Sigma = cov(Ws);
-
   T = n*real(W*inv(Sigma)*W'); % Hotelling's T^2 statistic
 
-  df = length(Zs); % degrees of freedom
+  df = size(Zs, 2); % degrees of freedom; also equal to (2*Z)^D
 
   p = chi2cdf(T, df, 'upper');
 

@@ -20,4 +20,7 @@ function [S_hat, CI] = sobolev_norm_est(Xs, s, Z)
 
   [S_hat, CI] = sobolev_inner_product_est(Xs_1, Xs_2, s, Z);
 
+  S_hat = real(S_hat);
+  CI = real(CI);
+
 end

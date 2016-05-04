@@ -17,16 +17,19 @@
 
 function [S_hat, CI] = sobolev_inner_product_est(Xs, Ys, s, Z, alpha)
 
-  Zs = -Z:Z;
+  D = size(Xs, 2);
+
+  Zs = permn(-Z:Z, D)';
+
+  coeffs = prod(abs(Zs).^s, 1);
 
   if nargout <= 1 % just give point estimate
+
     % TODO: generalize the outer products Xs*Zs and Ys*Zs to D > 1
     p_hats = mean(exp(-i * Xs * Zs), 1);
     q_hats = mean(exp(-i * Ys * Zs), 1);
 
-    coeffs = abs(Zs).^(2*s);
-
-    S_hat = coeffs*real((p_hats.*conj(q_hats))');
+    S_hat = (coeffs.^2)*real((p_hats.*conj(q_hats))');
 
   else if nargout == 2 % estimate confidence interval as well
 
@@ -34,8 +37,8 @@ function [S_hat, CI] = sobolev_inner_product_est(Xs, Ys, s, Z, alpha)
       alpha = 0.05; % default confidence level
     end
 
-    Ws = bsxfun(@times, abs(Zs).^s, exp(-i * Xs * Zs));
-    Vs = bsxfun(@times, abs(Zs).^s, exp(-i * Ys * Zs));
+    Ws = bsxfun(@times, coeffs, exp(-i * Xs * Zs));
+    Vs = bsxfun(@times, coeffs, exp(-i * Ys * Zs));
 
     W = mean(Ws, 1);
     V = mean(Vs, 1);
