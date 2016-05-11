@@ -7,15 +7,16 @@ n_samples = 10.^orders;
 
 %Two Gaussians with different vars
 gaussian_1 = gaussian_dis(0,1);
-gaussian_2 = gaussian_dis(0,2);
+gaussian_2 = gaussian_dis(0,4);
 square_difference_gaussian_var = square_loss(gaussian_1,gaussian_2);
 true_distance_gaussian_var = integral(square_difference_gaussian_var,-inf,inf);
 estimated_distances_gaussian_var = zeros(n_repeated,total_order_size);
 s = 0;
-s2= 2;
+s2= 1.5;
 Zs = @(n) n^(2/(4*s2 + 1)); % scaling of Z_n with n
 
 for j = 1:n_repeated
+    
     for i = 1:total_order_size
         Xs = randn(n_samples(i),1);
         Ys = 2*randn(n_samples(i),1);
