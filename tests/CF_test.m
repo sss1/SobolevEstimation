@@ -1,5 +1,5 @@
 % This is the original CF test proposed by Epps and Singleton (1986).
-function p = CF_test(Xs, Ys, K, J)
+function p = CF_test(Xs, Ys, J)
 
   n = size(Xs, 1); % sample size
 
