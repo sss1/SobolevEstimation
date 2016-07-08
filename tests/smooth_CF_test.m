@@ -1,5 +1,6 @@
 % This is the ``smooth characteristic function'' test proposed by
-% Chwialkowski, Ramdas, Sejdinovic, and Gretton (2015).
+% Chwialkowski, Ramdas, Sejdinovic, and Gretton, ``Fast Two-Sample Testing with
+% Analytic Representations of Probability Measures'', (NIPS 2015)
 function p = smooth_CF_test(Xs, Ys, J)
 
   n = size(Xs, 1); % sample size
